@@ -16,9 +16,9 @@ if you want to build your own binaries from sources simply:
 
 * install rust/cargo
 * clone the repo:
-  ```bash
-  git clone https://github.com/Xaryen/PNGDPI.git
-  ```
+```bash
+git clone https://github.com/Xaryen/PNGDPI.git
+```
 * in the project folder run:
  ```bash
 cargo build --release
