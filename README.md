@@ -12,7 +12,7 @@ Enter the address to the *folder* containing your png files, any subfolders will
 
 ### Build
 
-if you want to build your own binaries from source simply:
+if you want to build your own binaries from source:
 
 * install rust/cargo
 * clone the repo:
