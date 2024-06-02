@@ -4,7 +4,7 @@ A small utility for changing the dpi of .png files (primarily exports from a cer
 
 ### Download
 
-Download the .exe file from releases [here](https://github.com/Xaryen/PNGDPI/releases/latest)
+Download the .exe file from releases [here](https://github.com/Xaryen/PNGDPI/releases/latest).
 
 ### Use
 
@@ -15,9 +15,11 @@ Enter to address to the *folder* containing your pngs files, any subfolders will
 if you want to build your own binaries from sources simply:
 
 * install rust/cargo
-* clone the repo: ```bash
+* clone the repo:
+  ```bash
   git clone https://github.com/Xaryen/PNGDPI.git
   ```
-* in the project folder run: ```bash
+* in the project folder run:
+ ```bash
 cargo build --release
  ```
