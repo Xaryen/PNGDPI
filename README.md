@@ -8,11 +8,11 @@ Download the .exe file from releases [here](https://github.com/Xaryen/PNGDPI/rel
 
 ### Use
 
-Enter to address to the *folder* containing your pngs files, any subfolders will also be modified, the results will be found next to the original folder.
+Enter the address to the *folder* containing your pngs files, any subfolders will also be modified, the results will be found next to the original folder.
 
 ### Build
 
-if you want to build your own binaries from sources simply:
+if you want to build your own binaries from source simply:
 
 * install rust/cargo
 * clone the repo:
