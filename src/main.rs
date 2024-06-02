@@ -2,12 +2,12 @@ use std::fs::{self, File, OpenOptions};
 use std::io::{BufReader, BufWriter, Read, Write};
 use std::path::Path;
 use walkdir::WalkDir;
-use eframe::egui::{self};
+use eframe::egui::{self, Button};
 
 fn main() {
     let options = eframe::NativeOptions::default();
     let _ = eframe::run_native(
-        "DPI Modifier",
+        "PNG DPI Modifier",
         options,
         Box::new(|_cc| Box::new(App::default())),
     );
@@ -23,15 +23,20 @@ struct App {
 impl eframe::App for App {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui| {
-            ui.heading("DPI Modifier");
+            ui.heading("Modify DPI:");
 
-            ui.label("Folder Path:");
+            ui.add_space(20.0);
+            
+            ui.label("Target Folder Path:");
             ui.text_edit_singleline(&mut self.folder_path);
-
-            ui.label("DPI:");
+            
+            
+            ui.label("Target DPI:");
             ui.text_edit_singleline(&mut self.dpi);
+            
+            ui.add_space(20.0);
 
-            if ui.button("Run").clicked() {
+            if ui.add_sized([80.0, 40.0], Button::new("Run")).clicked() {
                 let dpi: u32 = match self.dpi.parse() {
                     Ok(dpi) => dpi,
                     Err(_) => {
@@ -39,11 +44,17 @@ impl eframe::App for App {
                         return;
                     }
                 };
+                
+                if self.folder_path.is_empty() {
+                    self.message = "Folder path is required".to_string();
+                    return;
+                }
 
                 if let Err(e) = process_folder(&self.folder_path, dpi) {
                     self.message = format!("Error: {:?}", e);
                 } else {
-                    self.message = "Processing complete".to_string();
+                    self.message = "Processing complete, results are in a _modified folder next to original location".to_string();
+                    println!("Finished.");
                 }
             }
 
@@ -55,7 +66,8 @@ impl eframe::App for App {
 
 fn process_folder(folder_path: &str, new_dpi: u32) -> Result<(), Box<dyn std::error::Error>> {
     let original_folder = Path::new(folder_path);
-    let modified_folder_path = original_folder.with_file_name("_modified");
+    let modified_folder_name = format!("{}_modified", original_folder.file_name().unwrap().to_string_lossy());
+    let modified_folder_path = original_folder.with_file_name(modified_folder_name);
     fs::create_dir_all(&modified_folder_path)?;
 
     for entry in WalkDir::new(folder_path) {
@@ -114,7 +126,7 @@ fn modify_dpi(path: &Path, dpi: u32, output_base: &Path, input_base: &Path) -> R
             phys_chunk_found = true;
             let x_ppm = u32::from_be_bytes([chunk_data[0], chunk_data[1], chunk_data[2], chunk_data[3]]);
             let y_ppm = u32::from_be_bytes([chunk_data[4], chunk_data[5], chunk_data[6], chunk_data[7]]);
-            let x_dpi = x_ppm as f32 / 39.3701;
+            let x_dpi = x_ppm as f32 / 39.3701; //1000/25.4 inches per meter
             let y_dpi = y_ppm as f32 / 39.3701;
             println!("original DPI: x = {:.2}, y = {:.2}", x_dpi, y_dpi);
 

@@ -3,6 +3,16 @@
 version = 3
 
 [[package]]
+name = "PNGDPI"
+version = "0.1.0"
+dependencies = [
+ "crc32fast",
+ "eframe",
+ "egui",
+ "walkdir",
+]
+
+[[package]]
 name = "ab_glyph"
 version = "0.2.26"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -875,16 +885,6 @@ name = "downcast-rs"
 version = "1.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "75b325c5dbd37f80359721ad39aca5a29fb04c89279657cffdda8736d0c0b9d2"
-
-[[package]]
-name = "dpirust"
-version = "0.1.0"
-dependencies = [
- "crc32fast",
- "eframe",
- "egui",
- "walkdir",
-]
 
 [[package]]
 name = "ecolor"
