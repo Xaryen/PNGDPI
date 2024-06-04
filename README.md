@@ -8,7 +8,7 @@ Download the .exe file from releases [here](https://github.com/Xaryen/PNGDPI/rel
 
 ### Use
 
-Enter the address to the *folder* containing your png files, any subfolders will also be modified, the results will be found next to the original folder.
+Enter the desired dpi and the path to the *folder* containing your png files, any subfolders will also be modified, the results will be found next to the original folder.
 
 ### Build
 
